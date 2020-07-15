@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intercambio_f/src/utils/custom_widgets.dart';
 
-class LoginPage extends StatelessWidget {
+class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Dimensiones
@@ -42,7 +42,7 @@ class LoginPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          title('Iniciar sesión', accentDarken),
+                          title('Registro', accentDarken),
                         ],
                       ),
                     ),
@@ -57,10 +57,10 @@ class LoginPage extends StatelessWidget {
                         children: [
                           inputText('Nombre de usuario', size, false,
                               Icon(Icons.person)),
+                          inputText('Correo', size, true,
+                              Icon(Icons.alternate_email)),
                           inputText('Contraseña', size, true, Icon(Icons.lock)),
-                          primaryButton(
-                              'Iniciar sesión', size, context, 'login'),
-                          flatButton('¿Olvidaste tu contraseña?', size)
+                          primaryButton('Registrarme', size, context, 'login'),
                         ],
                       ),
                     ),

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intercambio_f/src/utils/custom_widgets.dart';
 
-class LoginPage extends StatelessWidget {
+class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // Dimensiones
+    // Dimensiones del dispositivo
     final size = MediaQuery.of(context).size;
-
     return Scaffold(
       body: Stack(
         children: [
@@ -18,11 +17,9 @@ class LoginPage extends StatelessWidget {
           SingleChildScrollView(
             child: Container(
               padding: EdgeInsets.only(left: 16, right: 16, top: 20),
-              height: size.height * 0.50,
+              height: size.height * 0.45,
               width: double.infinity,
-              margin: _keyboardIsVisible(context)
-                  ? EdgeInsets.only(top: size.height * 0.25)
-                  : EdgeInsets.only(top: size.height * 0.50),
+              margin: EdgeInsets.only(top: size.height * 0.55),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(25.0),
@@ -31,36 +28,38 @@ class LoginPage extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  Expanded(
+                  // Texto de bienvenida
+                  Flexible(
                     flex: 1,
                     child: Container(
                       padding:
                           EdgeInsets.symmetric(horizontal: size.width * 0.075),
                       width: double.infinity,
-                      height: (size.height * 0.10),
+                      height: (size.height * 0.15),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          title('Iniciar sesión', accentDarken),
+                          title('Bienvenido', accentDarken),
+                          paragraph('Comienza a organizar tus intercambios',
+                              false, accentDarken)
                         ],
                       ),
                     ),
                   ),
-                  Expanded(
-                    flex: 5,
+                  // Botones
+                  Flexible(
+                    flex: 2,
                     child: Container(
                       width: double.infinity,
-                      height: (size.height * 0.45) - 25.0,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          inputText('Nombre de usuario', size, false,
-                              Icon(Icons.person)),
-                          inputText('Contraseña', size, true, Icon(Icons.lock)),
                           primaryButton(
                               'Iniciar sesión', size, context, 'login'),
-                          flatButton('¿Olvidaste tu contraseña?', size)
+                          secondaryButton(
+                              'Registrarme', size, context, 'register'),
+                          flatButton('Continuar como invitado', size)
                         ],
                       ),
                     ),
@@ -68,24 +67,9 @@ class LoginPage extends StatelessWidget {
                 ],
               ),
             ),
-          ),
-          Container(
-            margin: EdgeInsets.only(top: 40.0, left: 16.0),
-            child: IconButton(
-              icon: Icon(
-                Icons.arrow_back_ios,
-                color: secondary,
-              ),
-              onPressed: () => Navigator.pop(context),
-            ),
-          ),
+          )
         ],
       ),
     );
-  }
-
-  // Detecta si es visible el teclado
-  bool _keyboardIsVisible(BuildContext context) {
-    return !(MediaQuery.of(context).viewInsets.bottom == 0.0);
   }
 }
