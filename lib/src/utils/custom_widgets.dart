@@ -11,7 +11,7 @@ final accentDarken = Color.fromRGBO(21, 50, 67, 1);
 Widget title(String texto, Color color) {
   return Text(
     texto,
-    style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold, color: color),
+    style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: color),
   );
 }
 
@@ -20,9 +20,10 @@ Widget paragraph(String texto, bool negrita, Color color) {
   return Text(
     texto,
     style: TextStyle(
-        fontSize: 16.0,
-        fontWeight: negrita ? FontWeight.bold : FontWeight.normal,
-        color: color),
+      fontSize: 16.0,
+      fontWeight: negrita ? FontWeight.bold : FontWeight.normal,
+      color: color,
+    ),
   );
 }
 
@@ -84,9 +85,10 @@ Widget secondaryButton(
 }
 
 // Boton plano
-Widget flatButton(String texto, Size size) {
+Widget flatButton(
+    String texto, Size size, BuildContext context, String routeName) {
   return FlatButton(
-      onPressed: () {},
+      onPressed: () => Navigator.pushNamed(context, routeName),
       child: Container(
           alignment: Alignment.center,
           width: size.width * 0.70,

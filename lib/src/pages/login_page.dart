@@ -48,7 +48,7 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    flex: 5,
+                    flex: 6,
                     child: Container(
                       width: double.infinity,
                       height: (size.height * 0.45) - 25.0,
@@ -59,8 +59,9 @@ class LoginPage extends StatelessWidget {
                               Icon(Icons.person)),
                           inputText('Contraseña', size, true, Icon(Icons.lock)),
                           primaryButton(
-                              'Iniciar sesión', size, context, 'login'),
-                          flatButton('¿Olvidaste tu contraseña?', size)
+                              'Iniciar sesión', size, context, 'inter'),
+                          flatButton(
+                              '¿Olvidaste tu contraseña?', size, context, '')
                         ],
                       ),
                     ),

@@ -59,7 +59,8 @@ class WelcomePage extends StatelessWidget {
                               'Iniciar sesión', size, context, 'login'),
                           secondaryButton(
                               'Registrarme', size, context, 'register'),
-                          flatButton('Continuar como invitado', size)
+                          flatButton(
+                              'Continuar como invitado', size, context, 'inter')
                         ],
                       ),
                     ),

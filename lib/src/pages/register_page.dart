@@ -48,7 +48,7 @@ class RegisterPage extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    flex: 5,
+                    flex: 6,
                     child: Container(
                       width: double.infinity,
                       height: (size.height * 0.45) - 25.0,

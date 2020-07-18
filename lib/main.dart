@@ -4,5 +4,3 @@ import 'package:intercambio_f/src/app.dart';
 void main() {
   runApp(MyApp());
 }
-
-
