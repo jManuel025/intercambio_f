@@ -7,6 +7,10 @@ class InterlistPage extends StatelessWidget {
     // Dimensiones
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: AppBar(
+          backgroundColor: primary,
+          elevation: 0.0,
+          title: title('Intercambios', accentDarken)),
       body: Stack(
         children: [
           // Fondo
@@ -16,9 +20,9 @@ class InterlistPage extends StatelessWidget {
           // Contenedor inferior
           Container(
             padding: EdgeInsets.only(left: 16, right: 16, top: 20),
-            height: size.height * 0.85,
+            height: size.height,
             width: double.infinity,
-            margin: EdgeInsets.only(top: size.height * 0.15),
+            // margin: EdgeInsets.only(top: size.height * 0.01),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(25.0),
@@ -55,7 +59,7 @@ class InterlistPage extends StatelessWidget {
                           onPressed: () => showDialog(
                               // barrierDismissible: false,
                               context: context,
-                              builder: (_) => _dialogName(size, context)),
+                              builder: (_) => _dialogCode(size, context)),
                           child: Container(
                             child: paragraph(
                                 'Unirme a intercambio', true, accentDarken),
@@ -71,14 +75,6 @@ class InterlistPage extends StatelessWidget {
                 ),
               ],
             ),
-          ),
-          // titulo de la seccion
-          Container(
-            width: double.infinity,
-            height: size.height * 0.15,
-            padding: EdgeInsets.all(16.0),
-            alignment: Alignment.bottomLeft,
-            child: title('Intercambios', accentDarken),
           ),
         ],
       ),
@@ -197,10 +193,7 @@ class InterlistPage extends StatelessWidget {
         height: 45.0,
         child: TextFormField(
           decoration: InputDecoration(
-            // contentPadding:
-            //     EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
             labelText: 'Ingresa tu nombre',
-            // prefixIcon: Icon(Icons.perm_camera_mic),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),
             ),
@@ -218,35 +211,54 @@ class InterlistPage extends StatelessWidget {
         )
       ],
       contentPadding: EdgeInsets.only(top: 24.0, left: 24.0, right: 24.0),
-      // buttonPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 16.0),
     );
   }
-}
 
-class DottedLinePainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = new Paint();
-    paint.color = accentDarken;
-    paint.strokeWidth = 2.0;
-    paint.strokeCap = StrokeCap.round;
-    paint.style = PaintingStyle.stroke;
-
-    var max = size.width;
-    var dashWidth = 5;
-    var dashSpace = 5;
-    double startX = 0;
-    while (max >= 0) {
-      canvas.drawLine(Offset(startX, 0), Offset(startX + dashWidth, 0), paint);
-      final space = (dashSpace + dashWidth);
-      startX += space;
-      max -= space;
-    }
+  // cuadro de dialogo para codigo
+  Widget _dialogCode(Size size, BuildContext context) {
+    return AlertDialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+      title: paragraph('¿Tienes un código?', true, accentDarken),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          note('Ingresa el código del intercambio', false, accentDarken),
+          Container(
+            padding: EdgeInsets.only(bottom: 0),
+            margin: EdgeInsets.symmetric(vertical: 7.0),
+            width: size.width * 0.78,
+            height: 45.0,
+            child: TextFormField(
+              decoration: InputDecoration(
+                labelText: 'Código',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+      actions: [
+        Container(
+          // margin: EdgeInsets.symmetric(horizontal: 16.0),
+          child: FlatButton(
+              onPressed: () => {},
+              child: Container(
+                  alignment: Alignment.centerRight,
+                  child: note('Cancelar', true, accent))),
+        ),
+        Container(
+          margin: EdgeInsets.only(right: 16.0),
+          child: FlatButton(
+              onPressed: () => {},
+              child: Container(
+                  alignment: Alignment.centerRight,
+                  child: note('Aceptar', true, accentDarken))),
+        )
+      ],
+      contentPadding: EdgeInsets.only(top: 24.0, left: 24.0, right: 24.0),
+    );
   }
-
-  @override
-  bool shouldRepaint(DottedLinePainter oldDelegate) => false;
-
-  @override
-  bool shouldRebuildSemantics(DottedLinePainter oldDelegate) => false;
 }

@@ -114,3 +114,31 @@ Widget inputText(String texto, Size size, bool obscure, Icon icon) {
     ),
   );
 }
+
+class DottedLinePainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = new Paint();
+    paint.color = accentDarken;
+    paint.strokeWidth = 1.5;
+    paint.strokeCap = StrokeCap.round;
+    paint.style = PaintingStyle.stroke;
+
+    var max = size.width;
+    var dashWidth = 4;
+    var dashSpace = 4;
+    double startX = 0;
+    while (max >= 0) {
+      canvas.drawLine(Offset(startX, 0), Offset(startX + dashWidth, 0), paint);
+      final space = (dashSpace + dashWidth);
+      startX += space;
+      max -= space;
+    }
+  }
+
+  @override
+  bool shouldRepaint(DottedLinePainter oldDelegate) => false;
+
+  @override
+  bool shouldRebuildSemantics(DottedLinePainter oldDelegate) => false;
+}
