@@ -148,39 +148,7 @@ class _InterdetailPageState extends State<InterdetailPage> {
                     width: double.infinity,
                     child: Column(
                       children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(10.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: secondaryDarken,
-                                borderRadius: BorderRadius.circular(10.0)),
-                            height: 40.0,
-                            width: size.width * 0.78,
-                            child: Row(
-                              children: [
-                                Expanded(
-                                    flex: 12,
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      child: paragraph(
-                                          'HDO5VS5', true, accentDarken),
-                                    )),
-                                Expanded(
-                                    flex: 2,
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      color: primary,
-                                      child: IconButton(
-                                          icon: Icon(
-                                            Icons.content_copy,
-                                            color: secondary,
-                                          ),
-                                          onPressed: () {}),
-                                    )),
-                              ],
-                            ),
-                          ),
-                        ),
+                        _codeButton(size),
                         primaryButton(
                             'Realizar sorteo', size, context, 'routeName'),
                       ],
@@ -298,6 +266,40 @@ class _InterdetailPageState extends State<InterdetailPage> {
         )
       ],
       contentPadding: EdgeInsets.only(top: 24.0, left: 24.0, right: 24.0),
+    );
+  }
+
+  Widget _codeButton(Size size) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(10.0),
+      child: Container(
+        decoration: BoxDecoration(
+            color: secondaryDarken, borderRadius: BorderRadius.circular(10.0)),
+        height: 40.0,
+        width: size.width * 0.78,
+        child: Row(
+          children: [
+            Expanded(
+                flex: 12,
+                child: Container(
+                  alignment: Alignment.center,
+                  child: paragraph('HDO5VS5', true, accentDarken),
+                )),
+            Expanded(
+                flex: 2,
+                child: Container(
+                  alignment: Alignment.center,
+                  color: primary,
+                  child: IconButton(
+                      icon: Icon(
+                        Icons.content_copy,
+                        color: secondary,
+                      ),
+                      onPressed: () {}),
+                )),
+          ],
+        ),
+      ),
     );
   }
 }

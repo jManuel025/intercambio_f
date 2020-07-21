@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intercambio_f/src/pages/create_page.dart';
 import 'package:intercambio_f/src/pages/interdetail_page.dart';
 import 'package:intercambio_f/src/pages/interlist_page.dart';
 import 'package:intercambio_f/src/pages/register_page.dart';
@@ -25,8 +26,9 @@ class MyApp extends StatelessWidget {
         'register': (BuildContext context) => RegisterPage(),
         'inter': (BuildContext context) => InterlistPage(),
         'detail': (BuildContext context) => InterdetailPage(),
+        'create': (BuildContext context) => IntercreatePage()
       },
-      initialRoute: 'detail',
+      initialRoute: 'create',
     );
   }
 }
