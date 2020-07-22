@@ -11,10 +11,11 @@ enum WhyFarther { delete, edit }
 class _InterdetailPageState extends State<InterdetailPage> {
   @override
   Widget build(BuildContext context) {
-    // Dimensiones
     final size = MediaQuery.of(context).size;
+    // variable para popupmenu
     WhyFarther _selection;
     return Scaffold(
+      // Titulo de seccion
       appBar: AppBar(
           actions: [
             IconButton(
@@ -53,7 +54,6 @@ class _InterdetailPageState extends State<InterdetailPage> {
             padding: EdgeInsets.only(left: 16, right: 16, top: 20),
             height: size.height,
             width: double.infinity,
-            // margin: EdgeInsets.only(top: size.height * 0.01),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(25.0),
@@ -62,18 +62,22 @@ class _InterdetailPageState extends State<InterdetailPage> {
             ),
             child: Column(
               children: [
+                // Datos del intercambio
                 Expanded(
                     flex: 2,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        // detalles
                         _itemDetail(
                             'Monto del regalo', '250', Icons.attach_money),
                         _itemDetail('Fecha de entrega', '24/12/2020',
                             Icons.calendar_today),
                         _itemDetail(
                             'Hora de entrega', '24:00', Icons.access_time),
+                        // grupos
                         _groups(),
+                        // linea punteada
                         Container(
                           width: double.maxFinite,
                           margin: EdgeInsets.symmetric(vertical: 10.0),
@@ -81,6 +85,7 @@ class _InterdetailPageState extends State<InterdetailPage> {
                             painter: DottedLinePainter(),
                           ),
                         ),
+                        // participantes
                         Container(
                             width: double.maxFinite,
                             padding: EdgeInsets.symmetric(horizontal: 10.0),
@@ -88,6 +93,7 @@ class _InterdetailPageState extends State<InterdetailPage> {
                                 paragraph('Participantes', true, accentDarken)),
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 10.0),
+                          // participante
                           child: Row(
                             children: [
                               Expanded(
@@ -105,6 +111,7 @@ class _InterdetailPageState extends State<InterdetailPage> {
                               Expanded(
                                   flex: 1,
                                   child: Container(
+                                      // menu de opciones del participante
                                       child: PopupMenuButton<WhyFarther>(
                                     icon: Icon(Icons.more_vert),
                                     onSelected: (WhyFarther result) {
@@ -164,6 +171,7 @@ class _InterdetailPageState extends State<InterdetailPage> {
     );
   }
 
+  // Componente detalle de intercambio
   Widget _itemDetail(String indicatorText, String objectText, IconData icon) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 8.0),
@@ -195,6 +203,7 @@ class _InterdetailPageState extends State<InterdetailPage> {
     );
   }
 
+  // contenedor de chips de grupos
   Widget _groups() {
     return Column(children: [
       Container(
@@ -236,11 +245,13 @@ class _InterdetailPageState extends State<InterdetailPage> {
     ]);
   }
 
+  // chip
   Widget _myChip(String texto) {
     return Chip(
         backgroundColor: primary, label: note(texto, false, accentDarken));
   }
 
+  // confirmar eliminacion
   Widget _dialogDelete(Size size, BuildContext context) {
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
@@ -249,7 +260,6 @@ class _InterdetailPageState extends State<InterdetailPage> {
           paragraph('Esta accion no se puede revertir', false, accentDarken),
       actions: [
         Container(
-          // margin: EdgeInsets.symmetric(horizontal: 16.0),
           child: FlatButton(
               onPressed: () => {},
               child: Container(
@@ -269,6 +279,7 @@ class _InterdetailPageState extends State<InterdetailPage> {
     );
   }
 
+  // boton con el código
   Widget _codeButton(Size size) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10.0),

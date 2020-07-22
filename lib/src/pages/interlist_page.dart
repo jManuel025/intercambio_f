@@ -4,9 +4,9 @@ import 'package:intercambio_f/src/utils/custom_widgets.dart';
 class InterlistPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // Dimensiones
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      // Titulo de seccion
       appBar: AppBar(
           backgroundColor: primary,
           elevation: 0.0,
@@ -22,7 +22,6 @@ class InterlistPage extends StatelessWidget {
             padding: EdgeInsets.only(left: 16, right: 16, top: 20),
             height: size.height,
             width: double.infinity,
-            // margin: EdgeInsets.only(top: size.height * 0.01),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(25.0),
@@ -57,7 +56,6 @@ class InterlistPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                           onPressed: () => showDialog(
-                              // barrierDismissible: false,
                               context: context,
                               builder: (_) => _dialogCode(size, context)),
                           child: Container(
@@ -81,6 +79,7 @@ class InterlistPage extends StatelessWidget {
     );
   }
 
+  // Ilustracion de estado
   Widget _statusIllustration(Size size) {
     return Container(
         width: double.infinity,
@@ -105,6 +104,7 @@ class InterlistPage extends StatelessWidget {
         ])));
   }
 
+  // Icono y texto de dato
   Widget _iconText(Icon icon, String texto) {
     return Row(
       children: [
@@ -114,6 +114,7 @@ class InterlistPage extends StatelessWidget {
     );
   }
 
+  // Card con detalles deintercambio
   Widget _cardInfoInter() {
     return Card(
       elevation: 0.0,
@@ -168,6 +169,7 @@ class InterlistPage extends StatelessWidget {
                 )
               ],
             ),
+            // Linea punteada inferior
             Container(
               width: double.infinity,
               margin: EdgeInsets.only(top: 10.0),
@@ -242,7 +244,6 @@ class InterlistPage extends StatelessWidget {
       ),
       actions: [
         Container(
-          // margin: EdgeInsets.symmetric(horizontal: 16.0),
           child: FlatButton(
               onPressed: () => {},
               child: Container(

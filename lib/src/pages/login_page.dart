@@ -4,9 +4,7 @@ import 'package:intercambio_f/src/utils/custom_widgets.dart';
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // Dimensiones
     final size = MediaQuery.of(context).size;
-
     return Scaffold(
       body: Stack(
         children: [
@@ -16,6 +14,7 @@ class LoginPage extends StatelessWidget {
           ),
           // Contenedor inferior
           SingleChildScrollView(
+            padding: EdgeInsets.all(0),
             child: Container(
               padding: EdgeInsets.only(left: 16, right: 16, top: 20),
               height: size.height * 0.50,
@@ -31,6 +30,7 @@ class LoginPage extends StatelessWidget {
               ),
               child: Column(
                 children: [
+                  // Titulo de seccion
                   Expanded(
                     flex: 1,
                     child: Container(
@@ -47,6 +47,7 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                   ),
+                  // Inputs y botones
                   Expanded(
                     flex: 6,
                     child: Container(
@@ -70,6 +71,7 @@ class LoginPage extends StatelessWidget {
               ),
             ),
           ),
+          // Boton regreso
           Container(
             margin: EdgeInsets.only(top: 40.0, left: 16.0),
             child: IconButton(

@@ -6,15 +6,12 @@ class IntercreatePage extends StatefulWidget {
   _IntercreatePageState createState() => _IntercreatePageState();
 }
 
-enum WhyFarther { delete, edit }
-
 class _IntercreatePageState extends State<IntercreatePage> {
   @override
   Widget build(BuildContext context) {
-    // Dimensiones
     final size = MediaQuery.of(context).size;
-    WhyFarther _selection;
     return Scaffold(
+      // Titulo de seccion
       appBar: AppBar(
           leading: IconButton(
               icon: Icon(
@@ -37,7 +34,6 @@ class _IntercreatePageState extends State<IntercreatePage> {
             padding: EdgeInsets.only(left: 16, right: 16, top: 20),
             height: size.height,
             width: double.infinity,
-            // margin: EdgeInsets.only(top: size.height * 0.01),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(25.0),
@@ -46,12 +42,14 @@ class _IntercreatePageState extends State<IntercreatePage> {
             ),
             child: Column(
               children: [
+                // Contenido principal
                 Expanded(
                   flex: 9,
                   child: SingleChildScrollView(
                     child: Container(
                       padding: EdgeInsets.all(10.0),
                       width: double.infinity,
+                      // Inputs
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
@@ -64,15 +62,16 @@ class _IntercreatePageState extends State<IntercreatePage> {
                             width: double.maxFinite,
                           ),
                           inputText(
-                              'Nombre', size, false, Icon(Icons.card_giftcard)),
+                              'Motivo', size, false, Icon(Icons.card_giftcard)),
                           inputText('Monto del regalo', size, false,
                               Icon(Icons.attach_money)),
+                          // Input fecha y hora
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
                                 margin: EdgeInsets.symmetric(vertical: 7.0),
-                                width: size.width * 0.40,
+                                width: size.width * 0.425,
                                 height: 45.0,
                                 child: TextFormField(
                                   decoration: InputDecoration(
@@ -88,7 +87,7 @@ class _IntercreatePageState extends State<IntercreatePage> {
                               ),
                               Container(
                                 margin: EdgeInsets.symmetric(vertical: 7.0),
-                                width: size.width * 0.40,
+                                width: size.width * 0.425,
                                 height: 45.0,
                                 child: TextFormField(
                                   decoration: InputDecoration(
@@ -104,6 +103,7 @@ class _IntercreatePageState extends State<IntercreatePage> {
                               )
                             ],
                           ),
+                          // switch de grupos
                           SwitchListTile(
                             contentPadding: EdgeInsets.symmetric(vertical: 8.0),
                             activeColor: accent,
@@ -118,8 +118,9 @@ class _IntercreatePageState extends State<IntercreatePage> {
                               value = value;
                             }),
                           ),
-                          inputText('Nombre del grupo', size, false,
-                              Icon(Icons.group)),
+                          // input grupo
+                          _groupInput(size),
+                          // botones agregar y remover grupo
                           ButtonBar(
                             buttonPadding: EdgeInsets.all(0),
                             children: [
@@ -134,6 +135,7 @@ class _IntercreatePageState extends State<IntercreatePage> {
                     ),
                   ),
                 ),
+                // Botones
                 Expanded(
                     flex: 2,
                     child: Container(
@@ -184,140 +186,75 @@ class _IntercreatePageState extends State<IntercreatePage> {
     );
   }
 
-  Widget _itemDetail(String indicatorText, String objectText, IconData icon) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        children: [
-          Expanded(
-            flex: 1,
-            child: Container(
-                alignment: Alignment.center,
-                child: Icon(
-                  icon,
-                  color: accentDarken,
-                )),
-          ),
-          Expanded(
-            flex: 8,
-            child: Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  paragraph(indicatorText, true, accentDarken),
-                  paragraph(objectText, false, accentDarken)
-                ],
+  // Input para grupo
+  Widget _groupInput(Size size) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Container(
+          margin: EdgeInsets.symmetric(vertical: 7.0),
+          width: size.width * 0.55,
+          height: 45.0,
+          child: TextFormField(
+            decoration: InputDecoration(
+              contentPadding:
+                  EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
+              labelText: 'Grupo',
+              prefixIcon: Icon(Icons.group),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
               ),
             ),
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget _groups() {
-    return Column(children: [
-      Container(
-        padding: EdgeInsets.only(top: 7.5),
-        child: Row(
-          children: [
-            Expanded(
-              flex: 1,
-              child: Container(
-                  alignment: Alignment.center,
-                  child: Icon(
-                    Icons.group,
-                    color: accentDarken,
-                  )),
-            ),
-            Expanded(
-              flex: 8,
-              child: Container(child: paragraph('Grupos', true, accentDarken)),
-            )
-          ],
-        ),
-      ),
-      Container(
-        margin: EdgeInsets.only(bottom: 5.0),
-        child: Wrap(
-          alignment: WrapAlignment.center,
-          spacing: 7.5,
-          children: [
-            _myChip('Group 1'),
-            _myChip('Group 2'),
-            _myChip('Group 3'),
-            _myChip('Group 4'),
-            _myChip('Group 5'),
-            _myChip('Group 6'),
-            _myChip('Group 7'),
-          ],
-        ),
-      )
-    ]);
-  }
-
-  Widget _myChip(String texto) {
-    return Chip(
-        backgroundColor: primary, label: note(texto, false, accentDarken));
-  }
-
-  Widget _dialogDelete(Size size, BuildContext context) {
-    return AlertDialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-      title: paragraph('¿Eliminar intercambio?', true, accentDarken),
-      content:
-          paragraph('Esta accion no se puede revertir', false, accentDarken),
-      actions: [
-        Container(
-          // margin: EdgeInsets.symmetric(horizontal: 16.0),
-          child: FlatButton(
-              onPressed: () => {},
-              child: Container(
-                  alignment: Alignment.centerRight,
-                  child: note('Cancelar', true, accent))),
+          ),
         ),
         Container(
-          margin: EdgeInsets.only(right: 16.0),
-          child: FlatButton(
-              onPressed: () => {},
-              child: Container(
-                  alignment: Alignment.centerRight,
-                  child: note('Aceptar', true, accentDarken))),
-        )
+            margin: EdgeInsets.symmetric(vertical: 7.0),
+            width: size.width * 0.30,
+            height: 45.0,
+            child: _colorSelector()),
       ],
-      contentPadding: EdgeInsets.only(top: 24.0, left: 24.0, right: 24.0),
     );
   }
 
-  Widget _codeButton(Size size) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(10.0),
-      child: Container(
-        decoration: BoxDecoration(
-            color: secondaryDarken, borderRadius: BorderRadius.circular(10.0)),
-        height: 40.0,
-        width: size.width * 0.78,
-        child: Row(
-          children: [
-            Expanded(
-                flex: 12,
-                child: Container(
-                  alignment: Alignment.center,
-                  child: paragraph('HDO5VS5', true, accentDarken),
-                )),
-            Expanded(
-                flex: 2,
-                child: Container(
-                  alignment: Alignment.center,
-                  color: primary,
-                  child: IconButton(
-                      icon: Icon(
-                        Icons.content_copy,
-                        color: secondary,
-                      ),
-                      onPressed: () {}),
-                )),
-          ],
+  // selector de color
+  Widget _colorSelector() {
+    return Container(
+      height: double.maxFinite,
+      width: double.maxFinite,
+      decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey),
+          borderRadius: BorderRadius.circular(10.0)),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10.0),
+        child: FlatButton(
+          onPressed: () {},
+          padding: EdgeInsets.all(2),
+          child: Row(
+            children: [
+              Expanded(
+                  flex: 1,
+                  child: Container(
+                    width: double.maxFinite,
+                    height: double.maxFinite,
+                    alignment: Alignment.center,
+                    child: Container(
+                      width: 20,
+                      height: 20,
+                      decoration: BoxDecoration(
+                          color: Colors.pink,
+                          borderRadius: BorderRadius.circular(20)),
+                    ),
+                  )),
+              Expanded(
+                  flex: 2,
+                  child: Container(
+                    alignment: Alignment.centerLeft,
+                    height: double.maxFinite,
+                    width: double.maxFinite,
+                    child: paragraph('Rosa', false, Colors.grey[600]),
+                  ))
+            ],
+          ),
         ),
       ),
     );

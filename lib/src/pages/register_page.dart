@@ -4,9 +4,7 @@ import 'package:intercambio_f/src/utils/custom_widgets.dart';
 class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // Dimensiones
     final size = MediaQuery.of(context).size;
-
     return Scaffold(
       body: Stack(
         children: [
@@ -31,6 +29,7 @@ class RegisterPage extends StatelessWidget {
               ),
               child: Column(
                 children: [
+                  // Titulo de la seccion
                   Expanded(
                     flex: 1,
                     child: Container(
@@ -47,6 +46,7 @@ class RegisterPage extends StatelessWidget {
                       ),
                     ),
                   ),
+                  // Botones e inputs
                   Expanded(
                     flex: 6,
                     child: Container(
@@ -69,6 +69,7 @@ class RegisterPage extends StatelessWidget {
               ),
             ),
           ),
+          // Botton regreso
           Container(
             margin: EdgeInsets.only(top: 40.0, left: 16.0),
             child: IconButton(
