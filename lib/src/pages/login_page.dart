@@ -1,32 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:intercambio_f/src/utils/custom_widgets.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  bool obscure = true;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: primary,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () => Navigator.pushNamed(context, 'welcome'),
+        ),
+        elevation: 0.0,
+        toolbarHeight: 40.0,
+        actions: [
+          flatButton('Registro', () => Navigator.pushNamed(context, 'register'))
+        ],
+      ),
+      backgroundColor: primary,
       body: Stack(
         children: [
-          // Fondo
-          Container(
-            color: primary,
-          ),
           // Contenedor inferior
           SingleChildScrollView(
-            padding: EdgeInsets.all(0),
             child: Container(
-              padding: EdgeInsets.only(left: 16, right: 16, top: 20),
-              height: size.height * 0.50,
-              width: double.infinity,
-              margin: _keyboardIsVisible(context)
-                  ? EdgeInsets.only(top: size.height * 0.25)
-                  : EdgeInsets.only(top: size.height * 0.50),
+              padding: EdgeInsets.only(left: 32, right: 32, top: 16),
+              height: size.height * 0.50 - 10.0,
+              width: double.maxFinite,
+              margin: EdgeInsets.only(top: (size.height * 0.50) - 54.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(25.0),
                     topRight: Radius.circular(25.0)),
-                color: secondary,
+                color: Colors.white,
               ),
               child: Column(
                 children: [
@@ -34,35 +46,26 @@ class LoginPage extends StatelessWidget {
                   Expanded(
                     flex: 1,
                     child: Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: size.width * 0.075),
-                      width: double.infinity,
-                      height: (size.height * 0.10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          title('Iniciar sesión', accentDarken),
-                        ],
-                      ),
+                      width: double.maxFinite,
+                      alignment: Alignment.centerLeft,
+                      child: title('Iniciar sesión', accentDarken),
                     ),
                   ),
                   // Inputs y botones
                   Expanded(
                     flex: 6,
                     child: Container(
-                      width: double.infinity,
-                      height: (size.height * 0.45) - 25.0,
+                      width: double.maxFinite,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          inputText('Nombre de usuario', size, false,
-                              Icon(Icons.person)),
-                          inputText('Contraseña', size, true, Icon(Icons.lock)),
+                          inputText('Nombre', size, false, Icon(Icons.person)),
+                          passwordInput(obscure),
                           primaryButton(
-                              'Iniciar sesión', size, context, 'inter'),
-                          flatButton(
-                              '¿Olvidaste tu contraseña?', size, context, '')
+                            'Iniciar sesión',
+                            () => iniciarSesion(context),
+                          ),
+                          flatButton('¿Olvidaste tu contraseña?', () => {})
                         ],
                       ),
                     ),
@@ -71,24 +74,43 @@ class LoginPage extends StatelessWidget {
               ),
             ),
           ),
-          // Boton regreso
-          Container(
-            margin: EdgeInsets.only(top: 40.0, left: 16.0),
-            child: IconButton(
-              icon: Icon(
-                Icons.arrow_back_ios,
-                color: secondary,
-              ),
-              onPressed: () => Navigator.pop(context),
-            ),
-          ),
         ],
       ),
     );
   }
 
-  // Detecta si es visible el teclado
   bool _keyboardIsVisible(BuildContext context) {
     return !(MediaQuery.of(context).viewInsets.bottom == 0.0);
+  }
+
+  Widget passwordInput(bool oscure) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10.0),
+      height: 50.0,
+      child: TextFormField(
+        cursorColor: accentDarken,
+        obscureText: oscure,
+        decoration: InputDecoration(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          labelText: 'Contraseña',
+          prefixIcon: Icon(Icons.lock_outline),
+          suffixIcon: IconButton(
+              icon: Icon(
+                obscure ? Icons.visibility : Icons.visibility_off,
+              ),
+              onPressed: () {
+                setState(() {
+                  obscure = !obscure;
+                });
+              }),
+        ),
+      ),
+    );
+  }
+
+  void iniciarSesion(BuildContext context) {
+    Navigator.pushNamedAndRemoveUntil(context, 'inter', (route) => false);
   }
 }

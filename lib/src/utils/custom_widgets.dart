@@ -8,7 +8,7 @@ final accent = Color.fromRGBO(40, 75, 99, 1);
 final accentDarken = Color.fromRGBO(21, 50, 67, 1);
 
 // Titulos
-Widget title(String texto, Color color) {
+Text title(String texto, Color color) {
   return Text(
     texto,
     style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: color),
@@ -16,7 +16,7 @@ Widget title(String texto, Color color) {
 }
 
 // Parrafos
-Widget paragraph(String texto, bool negrita, Color color) {
+Text paragraph(String texto, bool negrita, Color color) {
   return Text(
     texto,
     style: TextStyle(
@@ -28,7 +28,7 @@ Widget paragraph(String texto, bool negrita, Color color) {
 }
 
 // Notas
-Widget note(String texto, bool negrita, Color color) {
+Text note(String texto, bool negrita, Color color) {
   return Text(
     texto,
     style: TextStyle(
@@ -39,21 +39,19 @@ Widget note(String texto, bool negrita, Color color) {
 }
 
 // Botón primario
-Widget primaryButton(
-    String texto, Size size, BuildContext context, String routeName) {
+Padding primaryButton(String texto, Function onPressed) {
   return Padding(
     padding: EdgeInsets.symmetric(vertical: 2.5),
     child: RaisedButton(
       color: accent,
       elevation: 0.0,
       hoverElevation: 0.0,
-      onPressed: () => Navigator.pushNamed(context, routeName),
+      onPressed: onPressed,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: Container(
         child: paragraph(texto, true, secondary),
-        width: size.width * 0.70,
         height: 40.0,
         alignment: Alignment.center,
       ),
@@ -62,21 +60,19 @@ Widget primaryButton(
 }
 
 // Botón secundario
-Widget secondaryButton(
-    String texto, Size size, BuildContext context, String routeName) {
+Padding secondaryButton(String texto, Function onPressed) {
   return Padding(
     padding: EdgeInsets.symmetric(vertical: 2.5),
     child: RaisedButton(
       color: secondaryDarken,
       elevation: 0.0,
       hoverElevation: 0.0,
-      onPressed: () => Navigator.pushNamed(context, routeName),
+      onPressed: onPressed,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: Container(
         child: paragraph(texto, true, accentDarken),
-        width: size.width * 0.70,
         height: 40.0,
         alignment: Alignment.center,
       ),
@@ -85,26 +81,29 @@ Widget secondaryButton(
 }
 
 // Boton plano
-Widget flatButton(
-    String texto, Size size, BuildContext context, String routeName) {
+FlatButton flatButton(String texto, Function onPressed) {
   return FlatButton(
-      onPressed: () => Navigator.pushNamed(context, routeName),
-      child: Container(
-          alignment: Alignment.center,
-          width: size.width * 0.70,
-          child: note(texto, true, accentDarken)));
+    onPressed: onPressed,
+    child: Container(
+      alignment: Alignment.center,
+      child: note(
+        texto,
+        true,
+        accentDarken,
+      ),
+    ),
+  );
 }
 
 // Input
 Widget inputText(String texto, Size size, bool obscure, Icon icon) {
   return Container(
-    margin: EdgeInsets.symmetric(vertical: 7.0),
-    width: size.width * 0.78,
-    height: 45.0,
+    margin: EdgeInsets.symmetric(vertical: 10.0),
+    height: 50.0,
     child: TextFormField(
+      cursorColor: accentDarken,
       obscureText: obscure,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
         labelText: texto,
         prefixIcon: icon,
         border: OutlineInputBorder(

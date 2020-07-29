@@ -17,6 +17,13 @@ class _InterdetailPageState extends State<InterdetailPage> {
     return Scaffold(
       // Titulo de seccion
       appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: accentDarken,
+            ),
+            onPressed: () => Navigator.pop(context),
+          ),
           actions: [
             IconButton(
                 icon: Icon(
@@ -33,31 +40,23 @@ class _InterdetailPageState extends State<InterdetailPage> {
                 ),
                 onPressed: () {})
           ],
-          leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back_ios,
-                color: accentDarken,
-              ),
-              onPressed: () {}),
           backgroundColor: primary,
           elevation: 0.0,
           centerTitle: true,
           title: title('Lorem ipsum', accentDarken)),
+      backgroundColor: primary,
       body: Stack(
         children: [
-          // Fondo
-          Container(
-            color: primary,
-          ),
           // Contenedor inferior
           Container(
-            padding: EdgeInsets.only(left: 16, right: 16, top: 20),
-            height: size.height,
+            padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
+            // height: size.height,
             width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(25.0),
-                  topRight: Radius.circular(25.0)),
+                topLeft: Radius.circular(25.0),
+                topRight: Radius.circular(25.0),
+              ),
               color: secondary,
             ),
             child: Column(
@@ -156,8 +155,7 @@ class _InterdetailPageState extends State<InterdetailPage> {
                     child: Column(
                       children: [
                         _codeButton(size),
-                        primaryButton(
-                            'Realizar sorteo', size, context, 'routeName'),
+                        primaryButton('Realizar sorteo', () => {}),
                       ],
                     ),
                   ),

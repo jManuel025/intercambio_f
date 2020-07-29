@@ -13,6 +13,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle.dark.copyWith(
+        statusBarColor: primary,
+        statusBarIconBrightness: Brightness.light,
+      ),
+    );
     return MaterialApp(
       title: 'Intercambio',
       debugShowCheckedModeBanner: false,
@@ -28,7 +34,7 @@ class MyApp extends StatelessWidget {
         'detail': (BuildContext context) => InterdetailPage(),
         'create': (BuildContext context) => IntercreatePage()
       },
-      initialRoute: 'create',
+      initialRoute: 'welcome',
     );
   }
 }

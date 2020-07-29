@@ -11,16 +11,13 @@ class InterlistPage extends StatelessWidget {
           backgroundColor: primary,
           elevation: 0.0,
           title: title('Intercambios', accentDarken)),
+      backgroundColor: primary,
       body: Stack(
         children: [
-          // Fondo
-          Container(
-            color: primary,
-          ),
           // Contenedor inferior
           Container(
-            padding: EdgeInsets.only(left: 16, right: 16, top: 20),
-            height: size.height,
+            padding: EdgeInsets.only(left: 16, right: 16, top: 16),
+            // height: size.height,
             width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
@@ -32,44 +29,38 @@ class InterlistPage extends StatelessWidget {
               children: [
                 // listado de cards
                 Expanded(
-                    flex: 4,
-                    child: ListView(
-                      padding: EdgeInsets.all(0),
-                      children: [
-                        _cardInfoInter(),
-                      ],
-                    )),
-                // contenedor de botones
-                SingleChildScrollView(
                   child: Container(
-                    padding: EdgeInsets.all(25.0),
-                    width: double.infinity,
-                    child: Column(
+                    child: ListView(
                       children: [
-                        primaryButton(
-                            'Crear intercambio', size, context, 'routeName'),
-                        RaisedButton(
-                          color: secondaryDarken,
-                          elevation: 0.0,
-                          hoverElevation: 0.0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          onPressed: () => showDialog(
-                              context: context,
-                              builder: (_) => _dialogCode(size, context)),
-                          child: Container(
-                            child: paragraph(
-                                'Unirme a intercambio', true, accentDarken),
-                            width: size.width * 0.70,
-                            height: 40.0,
-                            alignment: Alignment.center,
-                          ),
-                        ),
+                        _cardInfoInter(context),
                       ],
                     ),
                   ),
-                  // ),
+                ),
+                // contenedor de botones
+                Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16.0,
+                    vertical: 10.0,
+                  ),
+                  width: double.maxFinite,
+                  child: Column(
+                    children: [
+                      primaryButton(
+                        'Crear intercambio',
+                        () => Navigator.pushNamed(context, 'create'),
+                      ),
+                      secondaryButton(
+                        'Unirme a intercambio',
+                        () => showDialog(
+                          barrierDismissible: false,
+                          context: context,
+                          useSafeArea: false,
+                          builder: (_) => _dialogCode(size, context),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -115,69 +106,74 @@ class InterlistPage extends StatelessWidget {
   }
 
   // Card con detalles deintercambio
-  Widget _cardInfoInter() {
-    return Card(
-      elevation: 0.0,
-      child: Container(
-        child: Column(
-          children: [
-            Row(
-              children: [
-                // Icono e indicador de participantes
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    child: Column(
-                      children: [
-                        Icon(
-                          Icons.group,
-                          color: accentDarken,
-                          size: 30.0,
-                        ),
-                        paragraph('1', true, accentDarken)
-                      ],
+  Widget _cardInfoInter(BuildContext context) {
+    return FlatButton(
+      onPressed: () => Navigator.pushNamed(context, 'detail'),
+      padding: EdgeInsets.all(0.0),
+      child: Card(
+        margin: EdgeInsets.all(0.0),
+        elevation: 0.0,
+        child: Container(
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  // Icono e indicador de participantes
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      child: Column(
+                        children: [
+                          Icon(
+                            Icons.group,
+                            color: accentDarken,
+                            size: 30.0,
+                          ),
+                          paragraph('1', true, accentDarken)
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                // nombre y fecha de intercambio
-                Expanded(
-                  flex: 3,
-                  child: Container(
-                    padding: EdgeInsets.only(left: 5.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        paragraph('Lorem Ipsum', true, accentDarken),
-                        _iconText(Icon(Icons.calendar_today), '24/12/2020'),
-                      ],
+                  // nombre y fecha de intercambio
+                  Expanded(
+                    flex: 3,
+                    child: Container(
+                      padding: EdgeInsets.only(left: 5.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          paragraph('Lorem Ipsum', true, accentDarken),
+                          _iconText(Icon(Icons.calendar_today), '24/12/2020'),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                // hora y costo de intercambio
-                Expanded(
-                  flex: 3,
-                  child: Container(
-                    padding: EdgeInsets.only(left: 5.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _iconText(Icon(Icons.access_time), '24:00'),
-                        _iconText(Icon(Icons.attach_money), '250'),
-                      ],
+                  // hora y costo de intercambio
+                  Expanded(
+                    flex: 2,
+                    child: Container(
+                      padding: EdgeInsets.only(left: 5.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _iconText(Icon(Icons.access_time), '24:00'),
+                          _iconText(Icon(Icons.attach_money), '250'),
+                        ],
+                      ),
                     ),
-                  ),
-                )
-              ],
-            ),
-            // Linea punteada inferior
-            Container(
-              width: double.infinity,
-              margin: EdgeInsets.only(top: 10.0),
-              child: CustomPaint(
-                painter: DottedLinePainter(),
+                  )
+                ],
               ),
-            )
-          ],
+              // Linea punteada inferior
+              Container(
+                width: double.infinity,
+                margin: EdgeInsets.only(top: 10.0),
+                child: CustomPaint(
+                  painter: DottedLinePainter(),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -225,12 +221,10 @@ class InterlistPage extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          note('Ingresa el código del intercambio', false, accentDarken),
+          paragraph('Ingresa el código del intercambio', false, accentDarken),
           Container(
-            padding: EdgeInsets.only(bottom: 0),
-            margin: EdgeInsets.symmetric(vertical: 7.0),
-            width: size.width * 0.78,
-            height: 45.0,
+            margin: EdgeInsets.only(top: 10.0),
+            height: 40.0,
             child: TextFormField(
               decoration: InputDecoration(
                 labelText: 'Código',
@@ -245,21 +239,25 @@ class InterlistPage extends StatelessWidget {
       actions: [
         Container(
           child: FlatButton(
-              onPressed: () => {},
+              onPressed: () => Navigator.pop(context),
               child: Container(
                   alignment: Alignment.centerRight,
-                  child: note('Cancelar', true, accent))),
+                  child: paragraph('Cancelar', true, accent))),
         ),
         Container(
-          margin: EdgeInsets.only(right: 16.0),
+          margin: EdgeInsets.only(right: 10.0),
           child: FlatButton(
-              onPressed: () => {},
+              onPressed: () => _unirme(context),
               child: Container(
                   alignment: Alignment.centerRight,
-                  child: note('Aceptar', true, accentDarken))),
+                  child: paragraph('Unirme', true, accentDarken))),
         )
       ],
       contentPadding: EdgeInsets.only(top: 24.0, left: 24.0, right: 24.0),
     );
+  }
+
+  void _unirme(BuildContext context) {
+    Navigator.pop(context);
   }
 }
